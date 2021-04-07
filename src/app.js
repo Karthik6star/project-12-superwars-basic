@@ -1,4 +1,4 @@
-const PLAYERS = [
+const players = [
     "Spiderman",
     "Captain America",
     "Wonderwoman",
@@ -25,26 +25,55 @@ const PLAYERS = [
 const initPlayers = (players) => {
     let detailedPlayers = [];
     // Create players using for loop
-    // Type your code here
+    // Type your code her
 
-    return detailedPlayers;
-}
+        for(var i=0;i<players.length;i++){
+            detailedPlayers[i]={
+                name:players[i],
+                strength:getRandomStrength(),
+                image:"images/super-"+(i+1)+".png",
+                type:gettype(i)
+            }
+        }
+        return detailedPlayers;
+    }
+    const gettype=(value)=>{
+        if(value%2===0){
+            return("hero")
+
+        }
+        return("villian")
+        
+    }
+
 
 // getting random strength
 const getRandomStrength = () => {
     // Return a random integer (0,100]
     // Note: You can use Math.random() and Math.ceil()
+    return Math.floor(Math.random()*100)+1;
 }
 
 const buildPlayers = (players, type) => {
-    let fragment = '';
+    let fragment='';
 
     // Loop through players and accumulate HTML template
     // depending of type of player(hero|villain)
     // Type your code here
+    for(var i=0;i<players.length;i++){
+        play= `<div class="player"> 
+        <img src="${players[i].image}" alt="">
+        <div class="name">${players[i].name}</div>
+        <div class="strength">${players[i].strength}</div>
+      </div>`;
+      if(type== players[i].type){
+          fragment+=play;
+      }
+
+    }
 
     return fragment;
-}
+};
 // Display players in HTML
 const viewPlayers = (players) => {
 
@@ -54,5 +83,5 @@ const viewPlayers = (players) => {
 }
 
 window.onload = () => {
-    viewPlayers(initPlayers(PLAYERS));
+    viewPlayers(initPlayers(players));
 }
